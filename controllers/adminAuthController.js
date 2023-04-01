@@ -5,6 +5,7 @@ const config = require('config');
 const bcrypt = require('bcrypt');
 
 
+
 module.exports.signup = (req,res) => {
     const { name, email, password } = req.body;
 
@@ -88,3 +89,9 @@ module.exports.get_user = (req,res) => {
         .select('-password')
         .then(user => res.json(user));
 }
+
+module.exports.logout = async (req, res, next) => {
+    res.cookie("jwt",'',{ maxAge: 1});
+    res.send("Logged OUT");
+    // res.redirect("/");
+  };
